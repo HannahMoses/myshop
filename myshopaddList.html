@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> This is where user updates his shopping list</title>
+<link rel="stylesheet" href="templates/myshopstyling/myshopstyle2.css">
+
+
+<script>
+var itemName = prompt("Please enter your  item", "");
+function welcome(){
+    if (itemName!= null) {
+    document.getElementById("slist").innerHTML =
+    "Hello " + customerName + "! How are you today?";
+}
+}
+</script>
+</head>
+<body>
+    <div id="slist" >My Shopping list.</div>
+    <p2><script>document.write(welcome());</script></p2><!--Didn't work-->
+    <p2><script>document.write(itemName);</script></p2>
+</body>
+</html>
