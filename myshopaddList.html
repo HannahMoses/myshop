@@ -20,16 +20,22 @@ function welcome(){
     <div id="slist" >My Shopping list.</div>
     <p2><script>document.write(welcome());</script></p2><!--Didn't work-->
     <p2><script>document.write(itemName);</script></p2>
+    <p id="medicinearr"></p>
     <p id="demo"></p>
-
 <script>
-var items = ["Albuterol", "Burnsafe", "Dayquil", "Ibuprofen", "Nebulizer", "Wheelchair"];
+var medarr = [
+    "End Of items",
+    "happy shopping"
+];
+document.getElementById("medicinearr").innerHTML = medarr;
+</script>
+</body>
+</html>
+<!--var items = ["Smile",
+"Happy shopping"];
 var text = "";
 var i;
 for (i = 0; i < items.length; i++) {
     text += items[i] + "<br>";
 }
-document.getElementById("demo").innerHTML = text;
-</script>
-</body>
-</html>
+document.getElementById("demo").innerHTML = text;-->
