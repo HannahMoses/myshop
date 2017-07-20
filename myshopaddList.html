@@ -4,7 +4,8 @@
 <head>
     <title> This is where user updates his shopping list</title>
 <link rel="stylesheet" href="templates/myshopstyling/myshopstyle2.css">
-<script>var itemName = prompt("Please enter your  item", "");</script>
+<script>var itemName = prompt("Please enter your  item", "");
+var newbee = itemName;</script>
 </head>
 <body>
     <div id="slist" >My Shopping list.</div>
@@ -15,12 +16,13 @@
     <script>
     var medicalsupplies = [ "**"];
     function myFunction() {
-        medicalsupplies.push("lichee");
+        medicalsupplies.push(newbee);
         document.getElementById("addmedarr").innerHTML = medicalsupplies;
     }
     </script>
     <p1><script>document.write(",");</script></p1>
-    <p1><script>document.write(itemName);</script></p1>
+    <!--<p1><script>document.write(itemName);</script></p1>-->
+
 </body>
 </html>
 <!--
