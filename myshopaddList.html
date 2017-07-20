@@ -20,17 +20,30 @@ function welcome(){
     <div id="slist" >My Shopping list.</div>
     <p2><script>document.write(welcome());</script></p2><!--Didn't work-->
     <p2><script>document.write(itemName);</script></p2>
+    <p>Do you want to view the list?</p>
+
+<button onclick="myFunction()">View my list</button>
+    <p id="addmedarr"></p>
+
+    <script>
+    var fruits = ["Banana", "Orange", "Apple", "Mango"];
+    document.getElementById("demo").innerHTML = fruits;
+
+    function myFunction() {
+        fruits.push("Kiwi");
+        document.getElementById("addmedarr").innerHTML = fruits;
+    }
+    </script>
+</body>
+</html>
+<!--
+6:56 PM 7/19/2017array with prelisted items Cannot add user info
     <p id="medicinearr"></p>
-    <p id="demo"></p>
-<script>
 var medarr = [
     "End Of items",
     "happy shopping"
 ];
-document.getElementById("medicinearr").innerHTML = medarr;
-</script>
-</body>
-</html>
+document.getElementById("medicinearr").innerHTML = medarr;-->
 <!--var items = ["Smile",
 "Happy shopping"];
 var text = "";
