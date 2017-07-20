@@ -19,6 +19,9 @@ h2   {  color:pink;
 p    { text-align:center;
        font-size :30px;
      }
+p1   { text-align:left;
+	        font-size :40px;
+	      }
 div{  text-align:center;
        font-size :30px;
 }
