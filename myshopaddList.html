@@ -1,3 +1,5 @@
+<!-- Change link stylsheet for css-->
+
 <!DOCTYPE html>
 <html>
 
@@ -11,25 +13,24 @@ var newbee = itemName;</script>
     <div id="slist" >My Shopping list.</div><br>
 <!--<p1><script>document.write(itemName);</script></p1> -->
     <p2 id="mylist"></p2>
-    <p>Do you want to add more items? </p>
-    <a href="file:///C:/Users/cody/Downloads/Git/myshop/myshop.html"><p>Add more items</p></a>
     <p>Do you want to view the list?</p>
 <button  onclick="myFunction()">View my list</button><br><br>
-    <p1 id="addmedarr"></p1>
+    <p1 id="addmedarr"></p1><br>
     <p1 id="verticalist"></p1>
     <script>
     var medicalsupplies = [ "**"];
     function myFunction() {
         medicalsupplies.push(newbee);
-        medicalsupplies.shift();
+        var mylist = medicalsupplies.shift();
         document.getElementById("addmedarr").innerHTML = medicalsupplies;
-        var mylist = [medicalsuplies];
+        document.getElementById("verticalist").innerHTML = mylist;
 
         }
     document.getElementById("mylist").innerHTML = medicalsupplies;
     </script>
     <p1><script>document.write(",");</script></p1><br>
-
+    <p>Do you want to add more items? </p>
+    <a href="file:///C:/Users/cody/Downloads/Git/myshop/myshop.html"><p>Add more items</p></a>
 
 </body>
 </html>
