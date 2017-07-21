@@ -1,8 +1,40 @@
-<!-- Change link stylsheet for css-->
+<!-- 20Jul2017Thu7:55 pm-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title> This is where user updates his shopping list</title>
+<link rel="stylesheet" href="templates/myshopstyling/myshopstyle2.css">
+
+</head>
+<body>
+    <div id="slist" >My Shopping list.</div><br>
+    <p2 id="mylist"></p2>
+        <p1 id="addmedarr"></p1><br>
+    <p1 id="verticalist"></p1>
+    <script>
+    var medicalsupplies = [ " "];
+    function myFunction() {
+        var itemName = prompt("Please enter your  item", "");
+        var newbee = itemName;
+        medicalsupplies.unshift(newbee);
+
+        document.getElementById("addmedarr").innerHTML = medicalsupplies;
+
+        }
+    document.getElementById("mylist").innerHTML = medicalsupplies;
+    </script>
+    <p1><script>document.write(",");</script></p1><br>
+    <p>Do you want to add more items? </p>
+<!--        <a href="file:///C:/Users/cody/Downloads/Git/myshop/myshop.html"><p>Add more items</p></a>-->
+<button  onclick="myFunction()">Add more items</button><br>
+
+</body>
+</html>
+
+<!-- OLD CODE before I used unshift
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title> This is where user updates his shopping list</title>
 <link rel="stylesheet" href="templates/myshopstyling/myshopstyle2.css">
@@ -11,7 +43,6 @@ var newbee = itemName;</script>
 </head>
 <body>
     <div id="slist" >My Shopping list.</div><br>
-<!--<p1><script>document.write(itemName);</script></p1> -->
     <p2 id="mylist"></p2>
     <p>Do you want to view the list?</p>
 <button  onclick="myFunction()">View my list</button><br><br>
@@ -24,16 +55,16 @@ var newbee = itemName;</script>
         var mylist = medicalsupplies.shift();
         document.getElementById("addmedarr").innerHTML = medicalsupplies;
         document.getElementById("verticalist").innerHTML = mylist;
-
         }
     document.getElementById("mylist").innerHTML = medicalsupplies;
     </script>
     <p1><script>document.write(",");</script></p1><br>
     <p>Do you want to add more items? </p>
-    <a href="file:///C:/Users/cody/Downloads/Git/myshop/myshop.html"><p>Add more items</p></a>
+<button  onclick="myFunction()">Add more items</button><br>
 
 </body>
-</html>
+</html>-->
+<!-- END OF OLD CODE -->
 <!--
 6:56 PM 7/19/2017array with prelisted items Cannot add user info
     <p id="medicinearr"></p>
