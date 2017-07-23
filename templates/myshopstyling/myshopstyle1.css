@@ -4,12 +4,12 @@ head {  text-align:left;
      }
 body {
 	color:rgb(198,12,100);
-	background-color:rgb(12,134,4);
-
+	background-color:#b9f7be;
+	font-family:"Verdana";
      }
 
 h1   {  text-align:center;
-        color:pink;
+        color:#ba0544;
      }
 h2   {  color:pink;
         background-color:rgb(240,200,255)
@@ -18,8 +18,12 @@ h2   {  color:pink;
      }
 p    { text-align:center;
        font-size :30px;
+	   font-weight:bold;
      }
+p1{ text-align:left;
+	color:#000172;
 
+}
 div {
     border: 2px solid black;
     height:328px;

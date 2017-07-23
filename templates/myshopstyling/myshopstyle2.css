@@ -4,7 +4,7 @@ head {  text-align:left;
      }
 body {
 	color:rgb(19,120,100);
-	background-color:rgb(80,13,4);
+	background-color:rgb(229,148,78);
 
      }
 
@@ -18,13 +18,20 @@ h2   {  color:pink;
      }
 p    { text-align:center;
        font-size :30px;
+	   color:#6d2b39;
      }
 p1   { text-align:left;
 	        font-size :40px;
 	      }
 div{  text-align:center;
        font-size :30px;
+	   color:#614791;
 }
 p2    { text-align:left;
        font-size :30px;
      }
+p3{  text-align: left;
+	font-size:30px;
+	color:#6d2b39;
+
+}

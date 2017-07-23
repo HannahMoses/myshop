@@ -22,15 +22,19 @@
     function endofitems(){
         document.write("Thankyou.")
     }
+    function mymail(){
+        document.write("enter email id below:")
+
+    }
     document.getElementById("mylist").innerHTML = medicalsupplies;
     </script>
     <p1><script>document.write(",");</script></p1><br>
     <p>Do you want to add more items? </p>
-<!--        <a href="file:///C:/Users/cody/Downloads/Git/myshop/myshop.html"><p>Add more items</p></a>-->
 <button  onclick="myFunction()">Add more items</button><br><br>
 <button  onclick="endofitems()">No more items to add</button><br>
 <p>To email your list, copy the above list and click below.</p><br><br>
-<a href="https://www.google.com">Go to google and email my list<a>
+<!--<p3><a href="https://www.google.com">Go to google and email my list<a></p3>-->
+<button  onclick="mymail()">Email my shopping list</button><br><br>
 
 </body>
 </html>
