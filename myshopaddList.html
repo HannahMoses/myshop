@@ -4,7 +4,6 @@
 <head>
     <title> This is where user updates his shopping list</title>
 <link rel="stylesheet" href="templates/myshopstyling/myshopstyle2.css">
-
 </head>
 <body>
     <div id="slist" >My Shopping list.</div><br>
@@ -22,13 +21,12 @@
     function endofitems(){
         document.write("Thankyou.")
     }
-    function mymail(){
-        document.write("enter email id below:")
-
-    }
+//    function mymail(){
+//        document.getElementById("sendemail").innerHTML = ;
+        // document.write("enter email id below:")
+//    }
     function sendMessage(userId, email, callback) {
-  // Using the js-base64 library for encoding:
-  // https://www.npmjs.com/package/js-base64
+  // Using the js-base64 library for encoding:  // https://www.npmjs.com/package/js-base64
   var base64EncodedEmail = Base64.encodeURI(email);
   var request = gapi.client.gmail.users.messages.send({
     'userId': userId,
@@ -45,8 +43,10 @@
 <button  onclick="myFunction()">Add more items</button><br><br>
 <p><button  onclick="endofitems()">No more items to add</button><br></p>
 <p>To email your list, copy the above list and click below.</p><br><br>
-<!--<p3><a href="https://www.google.com">Go to google and email my list<a></p3>-->
-<button  onclick="mymail()">Email my shopping list</button><br><br>
+<!--<button  onclick="mymail()">Email my shopping list</button><br><br> -->
+<p id= "sendemail">
+    <a href="http://localhost:8000/quickstart.html"><h2>Email my shopping list</h2></a>
+</p>
 
 </body>
 </html>
