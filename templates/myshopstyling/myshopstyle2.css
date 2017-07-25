@@ -17,14 +17,15 @@ h2   {  color:pink;
      }
 p    { text-align:center;
        font-size :30px;
-	   color:#6d2b39;
+	   color:rgb(204, 255, 255);
      }
 p1   { text-align:left;
 	        font-size :40px;
+			color:pink;
 	      }
 div{  text-align:center;
        font-size :30px;
-	   color:#614791;
+	   color:rgb(255, 153, 153);
 }
 p2    { text-align:left;
        font-size :30px;
