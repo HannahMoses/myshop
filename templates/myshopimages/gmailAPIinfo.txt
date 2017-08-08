@@ -1,0 +1,46 @@
+
+******************
+To access the crerdentials of my project created using gmail API for LCoder2016fall@gmai.com
+I load the URL https://console.developers.google.com/apis/credentials?project=essential-hawk-174919
+into my browser.
+***AND open python shell and USE python -m SimpleHTTPServer 8000
+
+TO ACCESS GOOGLE CALENDAR:
+https://developers.google.com/google-apps/calendar/quickstart/js
+*****************
+gmail API 2:39 PM 7/26/2017
+email : LCoder2016fall@gmail J1%29
+Product name : curos
+HomePage URL :https://github.com/HannahMoses/proj1.git
+Product logo URL :https://github.com/HannahMoses/proj1/blob/master/templates/proj1shopimages/proj1logo.jpg
+
+client ID
+587907858568-sbga5v6l84nfcjtrdhd03cck5pm0v6tt.apps.googleusercontent.com
+
+client secret :  Ddsxnd37kySMwD7BIpZAJBZZ is downloaded into the folder
+                 C:\Users\cody\Downloads
+                 when I press downloadJSON button on credentials screen3:23 PM 7/26/2017
+
+*********************
+Gitbash activity is in the file
+E:\Imp\proj1\gitFiles\proj1GITcommands2017Jul26wed3p28
+Q &  A======+++++++++++=============
+1:11 PM 7/27/2017
+I have an HTML file that reads the next event in my calendar using this Google Calendar API javascript . (https://developers.google.com/google-apps/calendar/quickstart/js).
+
+It works correctly as described in the above link by manually inserting http://localhost:8000/quickstart.html in a browser address window with a python webserver running locally and I can see it makes a GET request in the Python server window. The events are printed to the same browser window. I have the quickstart.html file in the Python 3 directory.
+
+The question is how to run it (or the scripts inside) automatically from my menu.html page which refreshes once a minute with the time and date and print the event in the menu?
+
+Any assistance would be greatly appreciated. This is a small internal system all running on the same Windows 7 PC so there are no security worries in case that's an issue. Thanks, Phil
+Answers
+ans...If the code you are talking about runs on page load you could add
+setInterval(function(){ location.reload(); }, 6000);
+to your javascript or
+<meta http-equiv="refresh" content="60">
+to your HTML either will refresh the page the page every 60 seconds automatically and thus run your code again.
+
+
+ans...I think I may have found a solution with iFrames. <iframe src="localhost:8000/readcalendar.html"; align="left" frameborder="0"> </iframe> � Phil Jun 14 '16 at 21:54
+
+ans...That is an ok solution. as I don't have access to your code to see how it runs I would also consider looking into 'jquery load'. � Jinjubei Jun 15 '16 at 15:04

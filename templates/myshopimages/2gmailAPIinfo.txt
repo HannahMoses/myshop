@@ -1,0 +1,598 @@
+
+Hints
+**HINT 1a
+gapi.auth2.init(params)
+Initializes the GoogleAuth object. You must call this method before calling gapi.auth2.GoogleAuth's methods.
+When you initialize the GoogleAuth object, you configure the object with your OAuth 2.0 client ID and any additional options you want to specify. Then, if the user has already signed in, the GoogleAuth object restores the user's sign-in state from the previous session.
+PS: params = 
+An object containing key-value pairs of client configuration data. See gapi.auth2.ClientConfig for the different properties configurable. For example: 
+
+{
+  client_id: 'CLIENT_ID.apps.googleusercontent.com'
+}
+HINT1b
+gapi.auth2.GoogleAuth
+The gapi.auth2.GoogleAuth object. Use the then() method to get a Promise that is resolved when the gapi.auth2.GoogleAuth object finishes initializing. 
+
+HINT 1c
+API key = identifies your project using a simple API key to check quota and access.
+OAuth client ID requests user consent so your app can access the user's data.
+
+Service account key Enables server-to-server , app-level authentication using robot accounts
+
+HINT 2function initClient() CONTAINS
+gapi.auth2.getAuthInstance().IsSignedIn.listen(updateSigninStatus);
+
+HINT3 
+
+
+Hi forProj,
+
+curos now has access to your Google Account lcoder2016fall@gmail.com.
+
+curos can:
+View your emails messages and settings
+
+You should only give this access to apps you trust. Review or remove apps connected to your account any time at My Account.
+
+Learn more about what it means to connect an app to your account.
+The Google Accounts team
+
+HINT5  https://developers.google.com/api-client-library/javascript/reference/referencedocs
+gapi.client.request(args) 
+Creates a HTTP request for making RESTful requests. 
+
+gapi.client.setApiKey(apiKey) 
+Sets the API key for the application, which can be found in the Developer Console. Some APIs require this to be set in order to work.
+
+HINT5 
+end of hints************
+If the app needs information for a specific person, it can then call people.get, passing in a resource name, to get the person resource for that person.
+gapi.client.load(name, version, callback) FROM https://developers.google.com/api-client-library/javascript/reference/referencedocs
+ NEEDED FOR MY PROJECT Proj1**************3:37 PM 7/27/2017
+https://developers.google.com/api-client-library/javascript/reference/referencedocs
+1)   Section :Client setup
+gapi.client.init(args) 
+Initializes the JavaScript client with API key, OAuth client ID, scope, and API discovery document(s). If OAuth client ID and scope are provided, this function will load the gapi.auth2 module to perform OAuth. The gapi.client.init function can be run multiple times, such as to set up more APIs, to change API key, or initialize OAuth lazily. Note that the scope and clientId parameters cannot be provided multiple times, since the gapi.auth2 module can only be initialized once. 
+
+2)           Section : API request
+gapi.client.request(args) 
+Creates a HTTP request for making RESTful requests. 
+Arguments: 
+Name 
+Type 
+Description 
+args 
+object 
+An object encapsulating the various arguments for this method. The path is required, the rest are optional. The values are described in detail below. 
+Name 
+Type 
+Description 
+path 
+string 
+The URL to handle the request. 
+method 
+string 
+The HTTP request method to use. Default is GET. 
+params 
+object 
+URL params in key-value pair form. 
+headers 
+object 
+Additional HTTP request headers. 
+body 
+string | object 
+The HTTP request body (applies to PUT or POST). 
+Returns: 
+Type 
+Description 
+gapi.client.Request | undefined 
+The returned gapi.client.Request object implements goog.Thenable and can be used like a Promise that fulfills with the response object or rejects with a reason object. 
+
+
+2)https://developers.google.com/gmail/api/quickstart/js
+After the initial user authorization, calls to gapi.auth.authorize that use immediate:true mode will obtain an auth token without user interaction.
+FURTHER READING:
+Google APIs Client for JavaScript documentation
+https://developers.google.com/api-client-library/javascript/
+
+Easily access Google APIs from JavaScript
+Use the Google API Client Library for JavaScript to interact with Google APIs like Calendar, Analytics, and People.
+
+
+Getting Started
+
+You can use the JavaScript client library to interact with Google APIs, such as People, Calendar, and Drive, from your web applications. Follow the instructions on this page to get started.
+
+How to make API requests
+
+There are several ways to use the JavaScript client library to make API requests, but they all follow the same basic pattern:
+
+The application loads the JavaScript client library.
+The application initializes the library with API key, OAuth client ID, and API Discovery Document(s).SEE EXPLANATION AT END OF PAGE.
+The application sends a request and processes the response.
+The following sections show 3 common ways of using the JavaScript client library.
+
+Option 1: Load the API discovery document, then assemble the request.
+
+The following example assumes the user has already signed in. For a full example of how to sign in a user, see the full auth sample.
+
+<script src="https://apis.google.com/js/api.js"></script>
+<script>
+function start() {
+  // 2. Initialize the JavaScript client library.
+  gapi.client.init({
+    'apiKey': 'YOUR_API_KEY',
+    // Your API key will be automatically added to the Discovery Document URLs.
+    'discoveryDocs': ['https://people.googleapis.com/$discovery/rest'],
+    // clientId and scope are optional if auth is not required.
+    'clientId': 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
+    'scope': 'profile',
+  }).then(function() {
+    // 3. Initialize and make the API request.
+    return gapi.client.people.people.get({
+      'resourceName': 'people/me',
+      'requestMask.includeField': 'person.names'
+    });
+  }).then(function(response) {
+    console.log(response.result);
+  }, function(reason) {
+    console.log('Error: ' + reason.result.error.message);
+  });
+};
+// 1. Load the JavaScript client library.
+gapi.load('client', start);
+</script>
+    
+Option 2: Use gapi.client.request
+
+A more general way to make requests is to use gapi.client.request. Your application does not have to load the Discovery Document as in the first option, but it must still set the API key (and auth for some APIs). While you need to manually fill in REST parameters with this option, it saves one network request and reduces application size.
+
+<script src="https://apis.google.com/js/api.js"></script>
+<script>
+function start() {
+  // 2. Initialize the JavaScript client library.
+  gapi.client.init({
+    'apiKey': 'YOUR_API_KEY',
+    // clientId and scope are optional if auth is not required.
+    'clientId': 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
+    'scope': 'profile',
+  }).then(function() {
+    // 3. Initialize and make the API request.
+    return gapi.client.request({
+      'path': 'https://people.googleapis.com/v1/people/me?requestMask.includeField=person.names',
+    })
+  }).then(function(response) {
+    console.log(response.result);
+  }, function(reason) {
+    console.log('Error: ' + reason.result.error.message);
+  });
+};
+// 1. Load the JavaScript client library.
+gapi.load('client', start);
+</script>
+    
+Option 3: Use CORS
+
+Google APIs support CORS. If your application need to do media uploads and downloads, it should use CORS. See the CORS Support page for details.
+
+Supported environments
+
+The JavaScript client library works with the same browsers supported by Google Apps except that mobile browsers are currently not fully supported. It only works within HTML documents with a <body> element served using the https (preferred) and http protocols. However, <iframe sandbox> elements and other restricted execution contexts are not supported.
+
+Setup
+
+Get a Google Account
+
+First, sign up for a Google Account if you do not already have one.
+
+Create a Google project
+
+Go to the Google API Console. Click Create project, enter a name, and click Create.
+
+Enable Google APIs
+
+Next, decide which Google APIs your application needs to use and enable them for your project. Use the APIs Explorer to explore Google APIs that the JavaScript client library can work with.
+
+To enable an API for your project, do the following:
+
+Open the API Library in the Google API Console. If prompted, select a project or create a new one. The API Library lists all available APIs, grouped by product family and popularity.
+If the API you want to enable isn't visible in the list, use search to find it.
+Select the API you want to enable, then click the Enable button.
+If prompted, enable billing.
+If prompted, accept the API's Terms of Service.
+Get access keys for your application
+
+Google defines two levels of API access:
+
+Level	Description	Requires:
+Simple	API calls do not access any private user data	API key
+Authorized	API calls can read and write private user data, or the application's own data	OAuth 2.0 credentials
+To acquire an API key for simple access, do the following:
+
+Open the Credentials page in the API Console.
+Click Create credentials > API key and select the appropriate key type.
+To keep your API keys secure, follow the best practices for securely using API keys.
+
+To acquire OAuth 2.0 credentials for authorized access, do the following:
+
+Open the Credentials page in the API Console.
+Click Create credentials > OAuth client ID and select the appropriate Application type.
+For information about using OAuth 2.0 credentials, see the Authentication page.
+
+Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 3.0 License, and code samples are licensed under the Apache 2.0 License. For details, see our Site Policies. Java is a registered trademark of Oracle and/or its affiliates.
+
+Last updated May 23, 2017.
+
+********explanations***********
+1) API Discovery Document(s)
+API Discovery Document
+
+An API Discovery document describes the surface for a particular version of an API. The information includes API name, API version, API description, resource schemas, method definitions, authentication requirements, and more. The JavaScript client library uses the information to generate corresponding JavaScript methods that applications can use.
+
+Finding an API's Discovery Document URL
+
+If an API explicitly documents its discovery URL, always use it as-is to load the JavaScript client library. For example, the People API documents its discovery URL as:
+
+https://people.googleapis.com/$discovery/rest?version=v1
+Use this URL to load your JavaScript client.
+If there's no discovery URL in the API's documentation, you can construct the default discovery URL using the API name and the API version as follows:
+
+https://www.googleapis.com/discovery/v1/apis/name/version/rest
+For example, the Discovery URL of Translate API v2 is:
+
+https://www.googleapis.com/discovery/v1/apis/translate/v2/rest
+See Google API Discovery Service for details.
+
+Discovering generated methods
+
+After loading an API Discovery Document, the JavaScript client library automatically generates JavaScript methods for interacting with the API. For each method defined in the API Discovery Document, a corresponding method is constructed on the gapi.client object. For example, The People API's methods are under gapi.client.people. The People API has the methods people.get and people.connections.list, the generated methods can be called as follows:
+
+gapi.client.people.people.get(...)
+gapi.client.people.people.connections.list(...)
+You can view API methods on APIs Explorer. Alternatively, you can view the generated methods interactively in a browser's console (such as by using the Inspect command in Chrome) by printing the generated object console.log(gapi.client.people).
+
+Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 3.0 License, and code samples are licensed under the Apache 2.0 License. For details, see our Site Policies. Java is a registered trademark of Oracle and/or its affiliates.
+
+Last updated January 18, 2017.
+
+****explanation******
+2)
+Samples
+
+This page provides three detailed examples which demonstrate the library's functionality. Browse the project source for additional samples.
+
+Loading an API and Making a Request
+
+This snippet shows how to load an API and make a request. In this case, the request is going to Google Translate API. It's an example of "simple access", where the only credential required is the API key.
+
+<html>
+  <head>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+      function start() {
+        // Initializes the client with the API key and the Translate API.
+        gapi.client.init({
+          'apiKey': 'YOUR_API_KEY',
+          'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/translate/v2/rest'],
+        }).then(function() {
+          // Executes an API request, and returns a Promise.
+          // The method name `language.translations.list` comes from the API discovery.
+          return gapi.client.language.translations.list({
+            q: 'hello world',
+            source: 'en',
+            target: 'de',
+          });
+        }).then(function(response) {
+          console.log(response.result.data.translations[0].translatedText);
+        }, function(reason) {
+          console.log('Error: ' + reason.result.error.message);
+        });
+      };
+
+      // Loads the JavaScript client library and invokes `start` afterwards.
+      gapi.load('client', start);
+    </script>
+  </head>
+  <body>
+    <div id="results"></div>
+  </body>
+</html>
+Authorizing and Making Authorized Requests
+
+The following sample demonstrates how to get "authorized" access to a Google API using OAuth 2.0. See the full sample at authSample.html.
+
+<html>
+  <head></head>
+  <body>
+    <script type="text/javascript">
+      function handleClientLoad() {
+        // Loads the client library and the auth2 library together for efficiency.
+        // Loading the auth2 library is optional here since `gapi.client.init` function will load
+        // it if not already loaded. Loading it upfront can save one network request.
+        gapi.load('client:auth2', initClient);
+      }
+
+      function initClient() {
+        // Initialize the client with API key and People API, and initialize OAuth with an
+        // OAuth 2.0 client ID and scopes (space delimited string) to request access.
+        gapi.client.init({
+            apiKey: 'YOUR_API_KEY',
+            discoveryDocs: ["https://people.googleapis.com/$discovery/rest?version=v1"],
+            clientId: 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
+            scope: 'profile'
+        }).then(function () {
+          // Listen for sign-in state changes.
+          gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+          // Handle the initial sign-in state.
+          updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+        });
+      }
+
+      function updateSigninStatus(isSignedIn) {
+        // When signin status changes, this function is called.
+        // If the signin status is changed to signedIn, we make an API call.
+        if (isSignedIn) {
+          makeApiCall();
+        }
+      }
+
+      function handleSignInClick(event) {
+        // Ideally the button should only show up after gapi.client.init finishes, so that this
+        // handler won't be called before OAuth is initialized.
+        gapi.auth2.getAuthInstance().signIn();
+      }
+
+      function handleSignOutClick(event) {
+        gapi.auth2.getAuthInstance().signOut();
+      }
+
+      function makeApiCall() {
+        // Make an API call to the People API, and print the user's given name.
+        gapi.client.people.people.get({
+          'resourceName': 'people/me',
+          'requestMask.includeField': 'person.names'
+        }).then(function(response) {
+          console.log('Hello, ' + response.result.names[0].givenName);
+        }, function(reason) {
+          console.log('Error: ' + reason.result.error.message);
+        });
+      }
+    </script>
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+    <button id="signin-button" onclick="handleSignInClick()">Sign In</button>
+    <button id="signout-button" onclick="handleSignOutClick()">Sign Out</button>
+  </body>
+</html>
+It's called "authorized" access because the user must give the application direct authorization to use personal data. Simple web-based applications using JavaScript usually get this authorization the way this example does: by displaying button for the user to click. This action triggers a call to a Google auth server, which pops up a standard authorization dialog. For details, see the Authentication page.
+
+Note: Here we use gapi.load('client:auth2', ...) to load both the client module (for dealing with API requests) and the auth2 module (for dealing with OAuth 2.0) upfront. The gapi.client.init fuction lazily loads auth2 if it is needed. If you are sure your app needs auth, loading the two modules 'client:auth2' together before you call gapi.client.init will save one script load request.
+
+To make gapi.client.init set up OAuth correctly, you would have to assign the clientID variable the client ID generated when you registered your application (again, for instructions see the Getting Started page). The other parameter is scope, which in this case is just the scope for user profile permission.
+
+When the user clicks Authorize, the gapi.auth2.getAuthInstance().signIn() function is called, which shows user a popup window to let user authorize. Note that the gapi.auth2.getAuthInstance().signIn() can be only called from a user interaction context for most browsers (i.e. do not call it when your app starts, but call it in a button click handler).
+
+Note: when you authorize your application using Oauth 2.0, you do not also need to set the API key as in the first example. However, it is a good practice to do so, in case your code ever expands to handle unauthorized requests.
+Loading the Library Asychronously
+
+The following code snippet shows how to load the library without blocking UI loading. (The onreadystatechange is used to support old versions of IE.)
+
+<html>
+  <head>
+    <script>
+      function start() {
+        gapi.client.init({
+          'apiKey': '...',
+          'discoveryDocs': [...],
+          ...
+        }).then(...)
+      };
+
+      function loadClient() {
+        gapi.load('client', start);
+      }
+    </script>
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};loadClient()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+  </head>
+  <body>
+    <div id="body-to-be-shown-before-gapi-load"></div>
+  </body>
+</html>
+Putting it all together
+
+The file authSample.html expands on the concepts on this page and provides a more complete example of making an authenticated call to the Google People API.
+
+Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 3.0 License, and code samples are licensed under the Apache 2.0 License. For details, see our Site Policies. Java is a registered trademark of Oracle and/or its affiliates.
+
+Last updated May 23, 2017.
+*********************
+
+NOT NEEDED for MY PROJECT Proj1
+
+https://developers.google.com/gmail/api/guides/sending#creating_messages
+Creating messages
+The Gmail API requires MIME email messages compliant with RFC 2822 and encoded as base64url strings. Many programming languages have libraries or utilities that simplify the process of creating and encoding MIME messages. The following code examples demonstrate how to create a MIME message using the Google APIs client libraries for various langauges.
+JavaPython
+The following code sample demonstrates creating a MIME message, encoding to a base64url string, and assigning it to the raw field of the Message resource:
+
+def create_message(sender, to, subject, message_text):
+  """Create a message for an email.
+
+  Args:
+    sender: Email address of the sender.
+    to: Email address of the receiver.
+    subject: The subject of the email message.
+    message_text: The text of the email message.
+
+  Returns:
+    An object containing a base64url encoded email object.
+  """
+  message = MIMEText(message_text)
+  message['to'] = to
+  message['from'] = sender
+  message['subject'] = subject
+  return {'raw': base64.urlsafe_b64encode(message.as_string())}
+
+Creating messages with attachments
+Creating a message with an attachment is like creating any other message, but the process of uploading the file as a multi-part MIME message depends on the programming language. The following code examples demonstrate possible ways of creating a multi-part MIME message with an attachment.
+JavaPython
+Similar to the previous example, this example also handles encoding the message to base64url and assigning it to the raw field of the Message resource.
+
+def create_message_with_attachment(
+    sender, to, subject, message_text, file):
+  """Create a message for an email.
+
+  Args:
+    sender: Email address of the sender.
+    to: Email address of the receiver.
+    subject: The subject of the email message.
+    message_text: The text of the email message.
+    file: The path to the file to be attached.
+
+  Returns:
+    An object containing a base64url encoded email object.
+  """
+  message = MIMEMultipart()
+  message['to'] = to
+  message['from'] = sender
+  message['subject'] = subject
+
+  msg = MIMEText(message_text)
+  message.attach(msg)
+
+  content_type, encoding = mimetypes.guess_type(file)
+
+  if content_type is None or encoding is not None:
+    content_type = 'application/octet-stream'
+  main_type, sub_type = content_type.split('/', 1)
+  if main_type == 'text':
+    fp = open(file, 'rb')
+    msg = MIMEText(fp.read(), _subtype=sub_type)
+    fp.close()
+  elif main_type == 'image':
+    fp = open(file, 'rb')
+    msg = MIMEImage(fp.read(), _subtype=sub_type)
+    fp.close()
+  elif main_type == 'audio':
+    fp = open(file, 'rb')
+    msg = MIMEAudio(fp.read(), _subtype=sub_type)
+    fp.close()
+  else:
+    fp = open(file, 'rb')
+    msg = MIMEBase(main_type, sub_type)
+    msg.set_payload(fp.read())
+    fp.close()
+  filename = os.path.basename(file)
+  msg.add_header('Content-Disposition', 'attachment', filename=filename)
+  message.attach(msg)
+
+  return {'raw': base64.urlsafe_b64encode(message.as_string())}
+
+Sending messages
+Once you have created a message, you can send it by supplying it in the request body of a call to messages.send, as demonstrated in the following examples.
+JavaPython
+
+def send_message(service, user_id, message):
+  """Send an email message.
+
+  Args:
+    service: Authorized Gmail API service instance.
+    user_id: User's email address. The special value "me"
+    can be used to indicate the authenticated user.
+    message: Message to be sent.
+
+  Returns:
+    Sent Message.
+  """
+  try:
+    message = (service.users().messages().send(userId=user_id, body=message)
+               .execute())
+    print 'Message Id: %s' % message['id']
+    return message
+  except errors.HttpError, error:
+    print 'An error occurred: %s' % error
+If you're trying to send a reply and want the email to thread, make sure that:
+The Subject headers match
+The References and In-Reply-To headers follow the RFC 2822 standard.
+For information on sending a message from a draft, see Creating Drafts.Drafts represent unsent messages with the DRAFT system label applied
+Working with Drafts 
+Contents
+Creating draft messages
+Updating drafts
+Sending drafts
+Drafts represent unsent messages with the DRAFT system label applied. The message contained within the draft cannot be edited once created, but it can be replaced. In this sense, the draft resource is simply a container that provides a stable ID because the underlying message IDs change every time the message is replaced.
+Message resources inside a draft have similar behavior to other messages except for the following differences:
+Draft messages cannot have any label other than the DRAFT system label.
+When the draft is sent, the draft is automatically deleted and a new message with an updated ID is created with the SENT system label. This message is returned in the drafts.send response.
+
+Creating draft messages
+Your application can create drafts using the drafts.create method. The general process is to:
+Create a MIME message that complies with RFC 2822.
+Convert the message to a base64url encoded string.
+Create a draft, setting the value of the drafts.message.raw field to the encoded string.
+The following code examples demonstrate the process.
+JavaPython
+
+The following code sample demonstrates creating a MIME message, encoding to a base64url string, and assigning it to the raw field of the Message resource (download example):
+
+def create_message(sender, to, subject, message_text):
+  """Create a message for an email.
+
+  Args:
+    sender: Email address of the sender.
+    to: Email address of the receiver.
+    subject: The subject of the email message.
+    message_text: The text of the email message.
+
+  Returns:
+    An object containing a base64url encoded email object.
+  """
+  message = MIMEText(message_text)
+  message['to'] = to
+  message['from'] = sender
+  message['subject'] = subject
+  return {'raw': base64.urlsafe_b64encode(message.as_string())}
+Once you have created a Message object, you can pass it to the drafts.create method to create a Draft object.
+
+def create_draft(service, user_id, message_body):
+  """Create and insert a draft email. Print the returned draft's message and id.
+
+  Args:
+    service: Authorized Gmail API service instance.
+    user_id: User's email address. The special value "me"
+    can be used to indicate the authenticated user.
+    message_body: The body of the email message, including headers.
+
+  Returns:
+    Draft object, including draft id and message meta data.
+  """
+  try:
+    message = {'message': message_body}
+    draft = service.users().drafts().create(userId=user_id, body=message).execute()
+
+    print 'Draft id: %s\nDraft message: %s' % (draft['id'], draft['message'])
+
+    return draft
+  except errors.HttpError, error:
+    print 'An error occurred: %s' % error
+    return None
+
+Updating drafts
+Similarly to creating a draft, to update a draft you must supply a Draft resource in the body of your request with the draft.message.raw field set to a base64url encoded string containing the MIME message. Because messages cannot be updated, the message contained in the draft is destroyed and replaced by the new MIME message supplied in the update request.
+You can retrieve the current MIME message contained in the draft by calling drafts.get with the parameter format=raw.
+For more information, see drafts.update.
+
+Sending drafts
+When sending a draft, you can choose to send the message as-is or as with an updated message. If you are updating the draft content with a new message, supply a Draft resource in the body of the drafts.send request; set the draft.id of the draft to be sent; and set the draft.message.raw field to the new MIME message encoded as a base64url encoded string. For more information, see drafts.send.
+Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 3.0 License, and code samples are licensed under the Apache 2.0 License. For details, see our Site Policies. Java is a registered trademark of Oracle and/or its affiliates.
+Last updated May 11, 2017.
+
+
+
+==========+++++++===========
