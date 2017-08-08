@@ -1,18 +1,18 @@
 head {  text-align:left;
-	color:rgb(198,122,12);
+	color:pink;
 	background-color:rgb(110,12,13);
      }
 body {
-	color:rgb(198,12,100);
-background-color:rgb(12,134,4);
+	color:rgb(180,12,100);
+background-color:rgb(102,24,4);
 	font-family:"Verdana";
      }
 
 h1   {  text-align:center;
-        color:#ba0544;
+        color:pink;
      }
 h2   {  color:pink;
-        background-color:rgb(240,200,255)
+        background-color:rgb(120,20,5);
         text-align:left;
 
      }
@@ -21,7 +21,7 @@ p    { text-align:center;
 	   font-weight:bold;
      }
 p1{ text-align:left;
-	color:#000172;
+	color:pink;
 
 }
 div {

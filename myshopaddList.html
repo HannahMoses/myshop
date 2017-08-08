@@ -15,10 +15,11 @@
     <script>
     var medicalsupplies = [ " "];
     var itemsIaddedNow = Array.from(medicalsupplies);
-    var mynewlist =[""];
-    mynewlist.push.apply(mynewlist,itemsaddedNow);
+    var mynewlist =["n"];
+    //******* bug=itemsaddedNow instead of itemsIaddedNow
+//    mynewlist.push.apply(mynewlist,itemsIaddedNow);
     function myFunction() {
-        var itemName = prompt("Please enter your item", "");
+        var itemName = prompt("Please enter your items", "");
         var newbee = itemName;
         medicalsupplies.unshift(newbee);
         document.getElementById("addmedarr").innerHTML = medicalsupplies;
